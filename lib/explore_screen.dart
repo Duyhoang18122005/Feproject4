@@ -39,6 +39,18 @@ class _ExploreScreenState extends State<ExploreScreen> {
       final fetched = await ApiService.getAllMoments();
       print('📊 ExploreScreen: Nhận được ${fetched.length} moments');
       
+      // Debug: Print first moment structure
+      if (fetched.isNotEmpty) {
+        print('🔍 ExploreScreen: First moment structure:');
+        print('   - id: ${fetched[0]['id']}');
+        print('   - content: ${fetched[0]['content']}');
+        print('   - imageUrls: ${fetched[0]['imageUrls']} (type: ${fetched[0]['imageUrls'].runtimeType})');
+        print('   - gamePlayerUsername: ${fetched[0]['gamePlayerUsername']}');
+        print('   - gameName: ${fetched[0]['gameName']}');
+        print('   - createdAt: ${fetched[0]['createdAt']}');
+        print('   - playerUserId: ${fetched[0]['playerUserId']}');
+      }
+      
       // Lấy danh sách game duy nhất từ moments
       final games = <String>{};
       for (var m in fetched) {
@@ -272,6 +284,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                     ? '${ApiConfig.baseUrl}/api/moments/moment-images/' + (moment['imageUrls'][0] as String).split('/').last
                                     : null;
                                 final userId = moment['playerUserId']?.toString();
+                                
+                                // Debug: Print moment data for first few items
+                                if (index < 3) {
+                                  print('🖼️ ExploreScreen: Moment $index - imageUrls: ${moment['imageUrls']}');
+                                  print('🖼️ ExploreScreen: Moment $index - imageUrl: $imageUrl');
+                                }
+                                
                                 return GestureDetector(
                                   onTap: () async {
                                     // Mark moment as viewed khi user tap vào

@@ -168,7 +168,7 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Row(
           children: [
             CircleAvatar(
-              // radius: 18,
+              radius: 18,
               backgroundImage: avatarBytes != null ? MemoryImage(avatarBytes!) : null,
               child: avatarBytes == null ? const Icon(Icons.person, color: Colors.deepOrange) : null,
             ),
